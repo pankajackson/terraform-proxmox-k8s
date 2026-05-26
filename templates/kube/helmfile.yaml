@@ -17,12 +17,14 @@ releases:
     namespace: metallb-system
     createNamespace: true
     chart: metallb/metallb
+    version: ${metallb_version}
 
   - name: ingress-nginx
     installed: ${nginx_ingress_enabled}
     namespace: ingress-nginx
     createNamespace: true
     chart: ingress-nginx/ingress-nginx
+    version: ${nginx_ingress_version}
     values:
       - controller:
           service:
@@ -36,6 +38,7 @@ releases:
     namespace: storage
     createNamespace: true
     chart: nfs-subdir-external-provisioner/nfs-subdir-external-provisioner
+    version: ${nfs_storage_version}
     values:
       - nfs:
           server: ${nfs_storage_server}
@@ -50,6 +53,7 @@ releases:
     namespace: headlamp
     createNamespace: true
     chart: headlamp/headlamp
+    version: ${headlamp_version}
     values:
       - service:
           type: ClusterIP
