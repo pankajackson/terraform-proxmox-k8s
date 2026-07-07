@@ -101,16 +101,19 @@ variable "addons" {
 
     metallb = optional(object({
       enabled        = optional(bool, false)
+      version        = optional(string, "0.15.3")
       ipaddress_pool = optional(string, null)
     }), {})
 
     ingress_nginx = optional(object({
       enabled         = optional(bool, false)
+      version         = optional(string, "4.15.1")
       loadbalancer_ip = optional(string, null)
     }), {})
 
     nfs_storage = optional(object({
       enabled = optional(bool, false)
+      version = optional(string, "4.0.18")
 
       server = optional(string)
       path   = optional(string)
@@ -121,6 +124,7 @@ variable "addons" {
 
     headlamp = optional(object({
       enabled = optional(bool, false)
+      version = optional(string, "0.42.0")
 
       hostname = optional(string, "headlamp.local")
     }), {})
