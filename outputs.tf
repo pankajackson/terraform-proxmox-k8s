@@ -26,6 +26,7 @@ output "secrets" {
 
   value = {
     vm_private_key = tls_private_key.vm_key.private_key_pem
+    vm_public_key  = tls_private_key.vm_key.public_key_openssh
     vm_password    = random_password.vm_password.result
     k3s_token      = random_id.k3s_token.hex
     kubeconfig     = data.external.kubeconfig.result.kubeconfig
