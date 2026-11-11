@@ -7,6 +7,19 @@ https://keepachangelog.com/en/1.1.0/
 
 ---
 
+## [0.0.3] - 2026-11-11
+
+### Added
+
+- Added configurable default chart versions for MetalLB, ingress-nginx, NFS storage, and Headlamp
+- Added the VM public SSH key to the `secrets` output
+
+### Changed
+
+- Cloud-init snippets are now uploaded to the configured Proxmox node instead of a hard-coded node
+
+---
+
 ## [0.0.2] - 2026-05-17
 
 ### Added
