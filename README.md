@@ -138,11 +138,11 @@ Cluster level configuration.
 
 Proxmox VM configuration.
 
-| Name                        | Type     | Default           | Description                         |
-| --------------------------- | -------- | ----------------- | ----------------------------------- |
-| `proxmox.node`              | `string` | `"pve"`           | Proxmox target node                 |
-| `proxmox.cpu_type`          | `string` | `"x86-64-v2-AES"` | VM CPU type                         |
-| `proxmox.disk_datastore_id` | `string` | `"local-lvm"`     | Proxmox datastore used for VM disks |
+| Name                        | Type     | Default           | Description                                                       |
+| --------------------------- | -------- | ----------------- | ----------------------------------------------------------------- |
+| `proxmox.node`              | `string` | `"pve"`           | Proxmox target node used for VM placement and cloud-init snippets |
+| `proxmox.cpu_type`          | `string` | `"x86-64-v2-AES"` | VM CPU type                                                       |
+| `proxmox.disk_datastore_id` | `string` | `"local-lvm"`     | Proxmox datastore used for VM disks                               |
 
 ---
 
@@ -272,6 +272,7 @@ Optional cluster addons.
 | Name                            | Type     | Default        | Description                 |
 | ------------------------------- | -------- | -------------- | --------------------------- |
 | `addons.metallb.enabled`        | `bool`   | `false`        | Enable MetalLB              |
+| `addons.metallb.version`        | `string` | `"0.15.3"`     | MetalLB Helm chart version  |
 | `addons.metallb.ipaddress_pool` | `string` | auto-generated | MetalLB IP allocation range |
 
 #### Automatic MetalLB Pool Allocation
@@ -294,22 +295,24 @@ Example:
 
 #### addons.ingress_nginx
 
-| Name                                   | Type     | Default | Description                     |
-| -------------------------------------- | -------- | ------- | ------------------------------- |
-| `addons.ingress_nginx.enabled`         | `bool`   | `false` | Enable NGINX ingress controller |
-| `addons.ingress_nginx.loadbalancer_ip` | `string` | `null`  | Static LoadBalancer IP          |
+| Name                                   | Type     | Default    | Description                      |
+| -------------------------------------- | -------- | ---------- | -------------------------------- |
+| `addons.ingress_nginx.enabled`         | `bool`   | `false`    | Enable NGINX ingress controller  |
+| `addons.ingress_nginx.version`         | `string` | `"4.15.1"` | NGINX Ingress Helm chart version |
+| `addons.ingress_nginx.loadbalancer_ip` | `string` | `null`     | Static LoadBalancer IP           |
 
 ---
 
 #### addons.nfs_storage
 
-| Name                               | Type     | Default | Description                    |
-| ---------------------------------- | -------- | ------- | ------------------------------ |
-| `addons.nfs_storage.enabled`       | `bool`   | `false` | Enable NFS storage provisioner |
-| `addons.nfs_storage.server`        | `string` | `null`  | NFS server address             |
-| `addons.nfs_storage.path`          | `string` | `null`  | NFS export path                |
-| `addons.nfs_storage.storage_class` | `string` | `"nfs"` | StorageClass name              |
-| `addons.nfs_storage.default_class` | `bool`   | `false` | Set as default StorageClass    |
+| Name                               | Type     | Default    | Description                        |
+| ---------------------------------- | -------- | ---------- | ---------------------------------- |
+| `addons.nfs_storage.enabled`       | `bool`   | `false`    | Enable NFS storage provisioner     |
+| `addons.nfs_storage.version`       | `string` | `"4.0.18"` | NFS provisioner Helm chart version |
+| `addons.nfs_storage.server`        | `string` | `null`     | NFS server address                 |
+| `addons.nfs_storage.path`          | `string` | `null`     | NFS export path                    |
+| `addons.nfs_storage.storage_class` | `string` | `"nfs"`    | StorageClass name                  |
+| `addons.nfs_storage.default_class` | `bool`   | `false`    | Set as default StorageClass        |
 
 > `addons.nfs_storage.server` and `addons.nfs_storage.path` are required when the addon is enabled.
 
@@ -317,10 +320,11 @@ Example:
 
 #### addons.headlamp
 
-| Name                       | Type     | Default            | Description       |
-| -------------------------- | -------- | ------------------ | ----------------- |
-| `addons.headlamp.enabled`  | `bool`   | `false`            | Enable Headlamp   |
-| `addons.headlamp.hostname` | `string` | `"headlamp.local"` | Headlamp hostname |
+| Name                       | Type     | Default            | Description                 |
+| -------------------------- | -------- | ------------------ | --------------------------- |
+| `addons.headlamp.enabled`  | `bool`   | `false`            | Enable Headlamp             |
+| `addons.headlamp.version`  | `string` | `"0.42.0"`         | Headlamp Helm chart version |
+| `addons.headlamp.hostname` | `string` | `"headlamp.local"` | Headlamp hostname           |
 
 ---
 
@@ -420,6 +424,7 @@ output "secrets"
 Contains:
 
 - VM SSH private key
+- VM SSH public key
 - VM password
 - K3s token
 - Generated kubeconfig

@@ -32,7 +32,7 @@ resource "tls_private_key" "vm_key" {
 resource "proxmox_virtual_environment_file" "master_cloud_init" {
   content_type = "snippets"
   datastore_id = "local"
-  node_name    = "proxmox"
+  node_name    = var.proxmox.node
 
   source_raw {
     data = templatefile("${path.module}/templates/master-cloud-init.yaml", {
@@ -64,7 +64,7 @@ resource "proxmox_virtual_environment_file" "worker_cloud_init" {
 
   content_type = "snippets"
   datastore_id = "local"
-  node_name    = "proxmox"
+  node_name    = var.proxmox.node
 
   source_raw {
     data = templatefile("${path.module}/templates/worker-cloud-init.yaml", {

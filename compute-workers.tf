@@ -12,7 +12,7 @@ resource "proxmox_virtual_environment_vm" "lxa-k8s-worker" {
       time_static.master_identifier
     ]
   }
-  
+
   agent {
     # read 'Qemu guest agent' section, change to true only when ready
     enabled = true
